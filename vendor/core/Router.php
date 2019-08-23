@@ -31,10 +31,10 @@ class Router
 
     public static function dispatch($url) {
         if (self::matchRoute($url)) {
-
+            echo "OK";
         } else {
             http_response_code(404);
-            include '../../public/404.html';
+            include '404.html';
         }
     }
 }

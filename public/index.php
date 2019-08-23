@@ -1,7 +1,8 @@
 <?php
 
 //echo $query = rtrim(substr($_SERVER['QUERY_STRING'], 10), "/");
-echo $query = rtrim($_SERVER['REQUEST_URI'], '/');
+$query = rtrim($_SERVER['REQUEST_URI'], '/');
+$query = strlen($query) > 1 ? substr($query, 1) : $query;
 
 require '../vendor/core/Router.php';
 require '../vendor/libs/functions.php';
@@ -10,10 +11,10 @@ require '../vendor/libs/functions.php';
 //Router::add('posts', ['controller' => 'Posts', 'action' => 'index']);
 //Router::add('', ['controller' => 'Main', 'action' => 'index']);
 
-Router::add('^?', ['controller' => 'Main', 'action' => 'index']);
-Router::add('(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?');
+Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
+Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
 
-debug(Router::getRoutes());
+//debug(Router::getRoutes());
 
 Router::dispatch($query);
 
